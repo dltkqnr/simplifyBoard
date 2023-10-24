@@ -1,0 +1,12 @@
+version: "3"
+services:
+  database:
+    image: postgres
+    container_name: postgres
+    restart: always #컨테이너 종료 시 재시작 여부 결정
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: dev
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 1234
