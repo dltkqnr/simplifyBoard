@@ -7,6 +7,5 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: dev
-      POSTGRES_USER: user
+      POSTGRES_DB: board
       POSTGRES_PASSWORD: 1234
