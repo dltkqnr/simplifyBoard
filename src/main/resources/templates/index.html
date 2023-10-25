@@ -42,18 +42,18 @@
         <br><br>
         <h1 class="mt-5">게시글 작성</h1>
         <br>
-        <form th:action="@{/add}" th:object="${board}" method = "post">
+        <form th:action="@{/boards}" th:object="${board}" method = "post">
             <div class="mb-3">
-                <label for="title" class="form-label">글 제목</label>
-                <input type="form-control" class="form-control" id="title" th:field placeholder="제목입력..">
+                <label th:for="*{title}" class="form-label">글 제목</label>
+                <input type="text" class="form-control" th:field="*{title}" placeholder="제목입력..">
             </div>
             <div class="mb-3">
-                <label for="content" class="form-label">글 내용</label>
-                <textarea class="form-control" id="content" rows="8"></textarea>
+                <label th:for="*{content}" class="form-label">글 내용</label>
+                <textarea class="form-control"  th:field="*{content}" rows="8"></textarea>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="button" class="btn btn-primary">취소</button>
-                <button type="button" class="btn btn-primary">등록</button>
+                <button type="submit" class="btn btn-primary">등록</button>
             </div>
         </form>
 
