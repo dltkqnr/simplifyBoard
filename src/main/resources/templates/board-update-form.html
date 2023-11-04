@@ -40,6 +40,7 @@
         <h1 class="mt-5">게시글 수정</h1>
         <br>
         <form th:action="@{/boards/update/{id}(id=${boardInfo.id()})}" th:object="${boardInfo}" method = "post">
+            <input type="hidden" name="_method" value="put">
             <div class="mb-3">
                 <label th:for="*{title}" class="form-label">글 제목</label>
                 <input type="text" class="form-control" th:field="*{title}" placeholder="제목입력..">

@@ -44,5 +44,10 @@ public class BoardService {
                 .orElseThrow(()-> new IllegalArgumentException("게시글을 찾을 수 없습니다: " + id));
         board.update(request.title(), request.content());
     }
+
+    @Transactional
+    public void delete(int id) {
+        boardRepository.deleteById(id);
+    }
 }
 
