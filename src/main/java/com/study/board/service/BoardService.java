@@ -37,5 +37,12 @@ public class BoardService {
                 .map(BoardResponse::from)
                 .orElseThrow(()-> new IllegalArgumentException("게시글을 찾을 수 없습니다: " + id));
     }
+
+    @Transactional
+    public void update(int id, BoardRequest request) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("게시글을 찾을 수 없습니다: " + id));
+        board.update(request.title(), request.content());
+    }
 }
 

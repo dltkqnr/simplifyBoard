@@ -13,7 +13,7 @@
 <body>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">게시판 프로젝트</a>
+        <a class="navbar-brand" th:href="@{/}">게시판 프로젝트</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,9 +22,6 @@
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">List</a>
                 </li>
             </ul>
             <form class="d-flex">
@@ -40,20 +37,23 @@
 <main class="flex-shrink-0">
     <div class="container">
         <br><br>
-        <h1 class="mt-5">게시글 조회</h1>
+        <h1 class="mt-5">게시글 수정</h1>
         <br>
+        <form th:action="@{/boards/update/{id}(id=${boardInfo.id()})}" th:object="${boardInfo}" method = "post">
+            <div class="mb-3">
+                <label th:for="*{title}" class="form-label">글 제목</label>
+                <input type="text" class="form-control" th:field="*{title}" placeholder="제목입력..">
+            </div>
+            <div class="mb-3">
+                <label th:for="*{content}" class="form-label">글 내용</label>
+                <textarea class="form-control"  th:field="*{content}" rows="8"></textarea>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="button" class="btn btn-primary">취소</button>
+                <button type="submit" class="btn btn-primary">수정</button>
+            </div>
+        </form>
 
-        <h2>글 제목</h2><br>
-        <p th:text="${boardDetail.title()}"></p>
-
-        <h2>글 내용</h2><br>
-        <p th:text="${boardDetail.content()}"></p>
-
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a th:href="@{/boards/update/{id}(id=${boardDetail.id()})}">
-                <button type="button" class="btn btn-primary" >수정</button>
-            </a>
-        </div>
     </div>
 </main>
 

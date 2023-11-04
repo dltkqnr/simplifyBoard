@@ -24,7 +24,7 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/board}">글 작성</a>
+                    <a class="nav-link" th:href="@{/board-form}">글 작성</a>
                 </li>
             </ul>
             <form class="d-flex">
@@ -59,6 +59,7 @@
                     <td>
                         <a th:text="${board.title()}" th:href="@{/boards/{id}(id=${board.id()})}"></a>
                     </td>
+
                     <td th:text="${board.content()}"></td>
                     <td th:text="${board.createAt()}"></td>
                 </tr>
