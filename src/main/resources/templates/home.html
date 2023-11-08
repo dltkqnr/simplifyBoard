@@ -15,29 +15,34 @@
 
         <table class="table">
             <thead>
-                <tr>
-                    <th >#</th>
-                    <th>제목</th>
-                    <th>내용</th>
-                    <th>작성일자</th>
+            <tr>
+                <th >#</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>작성일자</th>
 
-                </tr>
+            </tr>
             </thead>
 
             <tbody>
-                <tr th:each="board : ${boards}">
-                    <td th:text="${board.id()}"></td>
-                    <td>
-                        <a th:text="${board.title()}" th:href="@{/boards/{id}(id=${board.id()})}"></a>
-                    </td>
+            <tr th:each="list : ${pageList}">
+                <td th:text="${list.id()}"></td>
+                <td>
+                    <a th:text="${list.title()}" th:href="@{/boards/{id}(id=${list.id()})}"></a>
+                </td>
 
-                    <td th:text="${board.content()}"></td>
-                    <td th:text="${board.createAt()}"></td>
-                </tr>
+                <td th:text="${list.content()}"></td>
+                <td th:text="${list.creatAt()}"></td>
+            </tr>
             </tbody>
 
         </table>
 
+
+        <th:block th:each="pageNumber:${#numbers.sequence(startPage,endPage)}">
+            <a th:if="${pageNumber != nowPage}" th:href="@{/(page=${pageNumber -1})}" th:text="${pageNumber}"></a>
+            <strong th:if="${pageNumber == nowPage}" th:text="${pageNumber}"></strong>
+        </th:block>
 
     </div>
 </main>

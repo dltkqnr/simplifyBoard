@@ -1,26 +1,38 @@
 package com.study.board.controller;
 
-import com.study.board.dto.BoardSimpleResponse;
 import com.study.board.dto.BoardRequest;
 import com.study.board.dto.BoardResponse;
 import com.study.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
 public class BoardController {
 
     private final BoardService boardService;
+    private final int PAGE_LENGTH = 3;
 
     @GetMapping("/")
-    public String home(Model model){
-        List<BoardSimpleResponse> responses = boardService.getBoards();
-        model.addAttribute("boards", responses);
+    public String home(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)Pageable pageable, Model model){
+
+        Page<BoardResponse> pages = boardService.getPageList(pageable);
+
+        int nowPage = pages.getPageable().getPageNumber() + 1;
+        int startPage = Math.max(nowPage - PAGE_LENGTH,1);
+        int endPage = Math.min(nowPage + PAGE_LENGTH, pages.getTotalPages());
+
+        model.addAttribute("pageList", pages);
+        model.addAttribute("nowPage", nowPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
         return "home";
     }
 
@@ -60,5 +72,4 @@ public class BoardController {
         boardService.delete(id);
         return "redirect:/";
     }
-
 }

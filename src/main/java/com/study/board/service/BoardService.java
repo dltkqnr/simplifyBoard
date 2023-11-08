@@ -1,11 +1,13 @@
 package com.study.board.service;
 
 import com.study.board.domain.Board;
-import com.study.board.dto.BoardSimpleResponse;
 import com.study.board.dto.BoardRequest;
 import com.study.board.dto.BoardResponse;
+import com.study.board.dto.BoardSimpleResponse;
 import com.study.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,6 +50,12 @@ public class BoardService {
     @Transactional
     public void delete(int id) {
         boardRepository.deleteById(id);
+    }
+
+
+    public Page<BoardResponse> getPageList(Pageable pageable){
+        Page<Board> pageList = boardRepository.findAll(pageable);
+        return pageList.map(BoardResponse::from);
     }
 }
 
