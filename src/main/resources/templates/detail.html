@@ -20,6 +20,7 @@
         <p th:text="${boardDetail.content()}"></p>
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="button" th:onclick="|location.href='@{/}'|" class="btn btn-primary">목록</button>
             <form th:action="@{/boards/update/{id}(id=${boardDetail.id()})}" method="get">
                 <button type="submit" class="btn btn-primary">수정</button>
             </form>
@@ -27,6 +28,7 @@
                 <input type="hidden" name="_method" value="delete">
                 <button type="submit" class="btn btn-primary">삭제</button>
             </form>
+
         </div>
     </div>
 </main>

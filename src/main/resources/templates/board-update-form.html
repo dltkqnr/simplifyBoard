@@ -16,15 +16,11 @@
             <input type="hidden" name="_method" value="put">
             <div class="mb-3">
                 <label th:for="*{title}" class="form-label">글 제목</label>
-                <label>
-                    <input type="text" class="form-control" th:field="*{title}" placeholder="제목입력..">
-                </label>
+                <input type="text" class="form-control" th:field="*{title}" placeholder="제목입력..">
             </div>
             <div class="mb-3">
                 <label th:for="*{content}" class="form-label">글 내용</label>
-                <label>
-                    <textarea class="form-control"  th:field="*{content}" rows="8"></textarea>
-                </label>
+                <textarea class="form-control"  th:field="*{content}" rows="8"></textarea>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="button" class="btn btn-primary">취소</button>
