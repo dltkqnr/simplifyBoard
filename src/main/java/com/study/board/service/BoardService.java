@@ -34,10 +34,18 @@ public class BoardService {
                 .toList();
     }
 
+    @Transactional
     public BoardResponse getBoard(int id) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다: " + id));
+        board.updateViewCount(board.getViewCount());
+        return BoardResponse.from(board);
+    }
+
+    public BoardResponse updateBoard (int id){
         return boardRepository.findById(id)
                 .map(BoardResponse::from)
-                .orElseThrow(()-> new IllegalArgumentException("게시글을 찾을 수 없습니다: " + id));
+                .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다: " + id));
     }
 
     @Transactional

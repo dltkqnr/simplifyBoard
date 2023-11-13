@@ -22,6 +22,8 @@ public class Board extends BaseTimeEntity {
 
     private String content;
 
+    private int viewCount;
+
     public Board(String title, String content) {
         this.title = title;
         this.content = content;
@@ -30,5 +32,9 @@ public class Board extends BaseTimeEntity {
     public void update(String title, String content){
         this.title = title;
         this.content = content;
+    }
+
+    public void updateViewCount(int viewCount){
+        this.viewCount = viewCount+1;
     }
 }
